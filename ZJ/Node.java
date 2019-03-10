@@ -1,3 +1,4 @@
+package Uchain.ZJ;
 public class Node{
 
 	static T t;//tool class that contains print and so on
