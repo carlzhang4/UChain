@@ -1,3 +1,4 @@
+packet UChain.Denny
 
 import java.io.*;   
 import java.net.*;
@@ -8,7 +9,6 @@ public class Server {
     public static void main(String[] args) throws IOException{  
     	Socket so;
     	ServerSocket server = null;
-    	//int port = 0;
     	for (int i = 10001; i <10010; i++){
     	    try {
     	      server = new ServerSocket(i);    
@@ -16,57 +16,26 @@ public class Server {
     	      break;
     	    }
     	    catch (IOException ex) {
-    	      System.out.println("¶Ë¿Ú©s" + i + " ÒÑ±»Õ¼ÓÃ");
+    	      System.out.println("ç«¯å£ï¹•" + i + " å·²è¢«å ç”¨");
     	    }
     	}
     	for(int i=10001; i<port; i++)
     	{
     		try { 
-                //´´½¨Á¬½ÓÖ¸¶¨·þÎñÆ÷ºÍ¶Ë¿ÚµÄSocket
+                //åˆ›å»ºè¿žæŽ¥æŒ‡å®šæœåŠ¡å™¨å’Œç«¯å£çš„Socket
                so= new Socket("localhost",i);
-               S_Thread thread = new S_Thread(so) ; //¿ªÆôÒ»¸öÏß³Ì´¦ÀíÁ¬½Ó
+               S_Thread thread = new S_Thread(so) ; //å¼€å¯ä¸€ä¸ªçº¿ç¨‹å¤„ç†è¿žæŽ¥
                thread.start() ;
     		}
             catch(Exception e) {            
             }
     	}
-        //ServerSocket server=new ServerSocket(port); //´´½¨°ó¶¨µ½ÌØ¶¨¶Ë¿ÚµÄ·þÎñÆ÷Ì×½Ó×Ö¡£  
-        /*try { 
-            //´´½¨Á¬½ÓÖ¸¶¨·þÎñÆ÷ºÍ¶Ë¿ÚµÄSocket
-           Socket so= new Socket("localhost",10086);
-           System.out.println("...Connect"); 
-           //´´½¨¼üÅÌÊäÈëµÄÊý¾ÝÁ÷
-           usein  = new  BufferedReader(new InputStreamReader(System.in));
-           //´´½¨·¢ËÍµ½·þÎñÆ÷¶ËµÄÊý¾ÝÁ÷
-           out= new PrintWriter(so.getOutputStream());
-
-            boolean flag=true;
-            while(flag) {           
-
-                String theLine=usein.readLine();
-                //Í¨¹ýÁ÷·¢ËÍÐÅÏ¢¸ø·þÎñÆ÷¶Ë
-                out.println( theLine);
-                out.flush();
-
-                BufferedReader in=new BufferedReader(new InputStreamReader(so.getInputStream())); 
-                String str=in.readLine();   
-                System.out.println("Server:"+str); 
-
-                if(theLine.equals("end")){
-                    so.close() ;
-                    break ;
-                }       
-             }  
-            }
-        catch(Exception e) {            
-        }
-    }*/
         System.out.println("....Service Start!");
         Con_Thread cthread = new Con_Thread();
         cthread.start();
         while(true){   
-            Socket client=server.accept(); //µÈ´ý¿Í»§Á¬½ÓÇëÇó
-            S_Thread thread = new S_Thread(client) ; //¿ªÆôÒ»¸öÏß³Ì´¦ÀíÁ¬½Ó
+            Socket client=server.accept(); //ç­‰å¾…å®¢æˆ·è¿žæŽ¥è¯·æ±‚
+            S_Thread thread = new S_Thread(client) ; //å¼€å¯ä¸€ä¸ªçº¿ç¨‹å¤„ç†è¿žæŽ¥
             thread.start() ;
         } 
     }  
@@ -79,51 +48,29 @@ class S_Thread extends Thread{
         Dis_Thread dthread = new Dis_Thread(client);
         dthread.start();
     }
-    public void run() {     
-        //BufferedReader in = null;
-        PrintWriter out = null;// »ñÈ¡Ð´Íù¿Í»§¶ËµÄÊä³öÁ÷,true±íÊ¾×Ô¶¯Ë¢ÐÂ 
+    public void run() {             
+        PrintWriter out = null;// èŽ·å–å†™å¾€å®¢æˆ·ç«¯çš„è¾“å‡ºæµ,trueè¡¨ç¤ºè‡ªåŠ¨åˆ·æ–° 
         BufferedReader usein = null;
-        try {
-            //in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        try {           
             out = new PrintWriter(client.getOutputStream(),true);
             usein  = new  BufferedReader(new InputStreamReader(System.in));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }   
-        while(true){   
-            //String str = null;
-            try {
-            	 //String theLine=usein.readLine();
-                 //Í¨¹ýÁ÷·¢ËÍÐÅÏ¢¸ø·þÎñÆ÷¶Ë
+        while(true){               
+            try {           	 
+                 //é€šè¿‡æµå‘é€ä¿¡æ¯ç»™æœåŠ¡å™¨ç«¯
             	 if(Server.flag)
             	 {
             		 out.println("a from "+Server.port);
             		 out.flush();
             		 this.sleep(1000);
-            	 }                
-                //str = in.readLine();
-            } /*catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } */catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}   
-            //System.out.println("Client: "+str);   
-            //out.println("has receive....");   
-            //out.flush();  
-            /*if(str.equals("end")){
-                System.out.println("Client Close!") ;
-                break ;
-            }*/
-        }
-        /*try {
-            client.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
+            	 }                               
+            } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
     }
 }
 
@@ -134,35 +81,21 @@ class Dis_Thread extends Thread{
     }
     public void run() {     
         BufferedReader in = null;
-        //PrintWriter out = null;// »ñÈ¡Ð´Íù¿Í»§¶ËµÄÊä³öÁ÷,true±íÊ¾×Ô¶¯Ë¢ÐÂ 
-        //BufferedReader usein = null;
         try {
-            in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            //out = new PrintWriter(client.getOutputStream(),true);
-            //usein  = new  BufferedReader(new InputStreamReader(System.in));
+            in = new BufferedReader(new InputStreamReader(client.getInputStream()));            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }   
         while(true){   
             String str = null;
-            try {
-            	 /*String theLine=usein.readLine();
-                 //Í¨¹ýÁ÷·¢ËÍÐÅÏ¢¸ø·þÎñÆ÷¶Ë
-                 out.println(theLine+" from "+Server.port);
-                 out.flush();
-                 this.sleep(1000);*/
+            try {           	 
                 str = in.readLine();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            } /*catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}   */
-            System.out.println("Client: "+str);   
-            //out.println("has receive....");   
-            //out.flush();  
+            } 
+            System.out.println("Client: "+str);               
             if(str.equals("end")){
                 System.out.println("Client Close!") ;
                 break ;
