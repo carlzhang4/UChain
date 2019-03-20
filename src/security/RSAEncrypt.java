@@ -23,15 +23,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;  
    
 public class RSAEncrypt {  
-    /** 
-     * 字节数据转字符串专用集合 
-     */ 
     private static final char[] HEX_CHAR = { '0', '1', '2', '3', '4', '5', '6',  
             '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };  
    
-    /** 
-     * 随机生成密钥对 
-     */ 
     public static void genKeyPair(String filePath) {  
         // KeyPairGenerator类用于生成公钥和私钥对，基于RSA算法生成对象  
         KeyPairGenerator keyPairGen = null;  
