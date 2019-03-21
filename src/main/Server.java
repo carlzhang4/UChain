@@ -14,7 +14,7 @@ public class Server {
     	      port=i;
     	      break;
     	    }
-    	    catch (IOException ex) {insta
+    	    catch (IOException ex) {
     	      System.out.println("端口﹕" + i + " 已被占用");
     	    }
     	}
@@ -47,32 +47,32 @@ class S_Thread extends Thread{
         Dis_Thread dthread = new Dis_Thread(client);
         dthread.start();
     }
-    public void run() {
-        PrintWriter out = null;// 获取写往客户端的输出流,true表示自动刷新
-        BufferedReader usein = null;
-        try {
-            out = new PrintWriter(client.getOutputStream(),true);
-            usein  = new  BufferedReader(new InputStreamReader(System.in));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        while(true){
-            try {
-                 //通过流发送信息给服务器端
-            	 if(Server.flag)
-            	 {
-            		 out.println("a from "+Server.port);
-            		 out.flush();
-            		 this.sleep(1000);
-            	 }
-            } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+	    public void run() {
+	        PrintWriter out = null;// 获取写往客户端的输出流,true表示自动刷新
+	        BufferedReader usein = null;
+	        try {
+	            out = new PrintWriter(client.getOutputStream(),true);
+	            usein  = new  BufferedReader(new InputStreamReader(System.in));
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        while(true){
+	            try {
+	                 //通过流发送信息给服务器端
+	            	 if(Server.flag)
+	            	 {
+	            		 out.println("a from "+Server.port);
+	            		 out.flush();
+	            		 this.sleep(1000);
+	            	 }
+	            } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	}
 }
-
 class Dis_Thread extends Thread{
     Socket client ;
     public Dis_Thread(Socket client){
@@ -126,4 +126,5 @@ class Con_Thread extends Thread{
 		}
 	}
 }
+
 

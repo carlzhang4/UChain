@@ -1,27 +1,20 @@
 package main;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.Map;
 
-import sun.security.ec.ECKeyFactory;
+import tool.*;
 
 public class Node{
 
 
-	public static void main(String[] args) throws Exception { //after node has been started, run main all the time
-        publishProblem("Path");
-        NodeInfo.run();
+	public static void main(String[] args)  { //after node has been started, run main all the time
+       try {
+    	   NodeInfo.run();
+    	   ProblemPublisher.run();
+       } 
+       catch (Exception e) {
+    	 Tool.err(e.getMessage());
+       }
         
-
-  
+        
     }
-
-
-
-    private static Boolean publishProblem(String path){ //publish a problem contains two matrix, return success or fail
-		ProblemPublisher mPublisher = new ProblemPublisher();
-		return false;
-    }
-
 
 }
