@@ -1,6 +1,7 @@
 package tool;
 
 public class Matrix implements java.io.Serializable{
+	private static final long serialVersionUID = 4125096758372084309L;
 	private int row;
 	private int col;
 	private int[][] data;
@@ -21,6 +22,14 @@ public class Matrix implements java.io.Serializable{
 		else
 			return false;
 	}
+	
+	public void clear() {
+		for(int i = 0; i<row; i++)
+			for(int j = 0; j<col; j++) {
+				data[i][j] = 0;
+			}
+	}
+	
 	public String toString() {
 		StringBuilder m = new StringBuilder();
 		m.append("row:"+row+"  col:"+col+"\n");

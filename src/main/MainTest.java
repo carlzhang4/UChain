@@ -3,7 +3,7 @@ import security.*;
 public class MainTest {  
    
     public static void main(String[] args) throws Exception {  
-        String filepath="./keyfile";  
+        String filepath="./nodeInfo/keyFile";  
    
         //生成公钥和私钥文件
         RSAEncrypt.genKeyPair(filepath); 
