@@ -29,7 +29,7 @@ public class NodeInfo {
 		
 	}
 	
-	private static void buildInfo() throws IOException, NoSuchAlgorithmException{
+	private static void buildInfo() throws IOException, NoSuchAlgorithmException, UException{
 			if(!Tool.fileExist(dirPath)) {
 				Tool.mkdir(dirPath);
 				Tool.print("Dir create success!");

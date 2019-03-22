@@ -1,4 +1,4 @@
-package security;
+package test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +12,8 @@ import java.io.ObjectOutputStream;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+
+import security.Base64;
 
 public class DESTest {
 

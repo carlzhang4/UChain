@@ -1,4 +1,4 @@
-package main;
+package tool;
 
 public class UException extends Exception{
 	public UException(String info) {

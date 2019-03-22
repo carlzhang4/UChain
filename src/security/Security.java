@@ -25,8 +25,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import main.UException;
-import tool.Tool;
+
+import tool.*;
 
 public class Security {
 	private static final String dirPath = "./nodeInfo/keyFile";
@@ -47,7 +47,7 @@ public class Security {
 		Tool.print(equal);
 	}
 
-	public static void generateKey() throws NoSuchAlgorithmException, IOException {
+	public static void generateKey() throws NoSuchAlgorithmException, IOException, UException {
 
 		Tool.mkdir(dirPath);
 		KeyPairGenerator keyPairGen = null;
