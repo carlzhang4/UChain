@@ -2,6 +2,8 @@ package tool;
 
 import java.io.File;
 
+import main.UException;
+
 public class Tool{
 	public static void print(String content){
 		System.out.println(content);
@@ -30,8 +32,25 @@ public class Tool{
 		else
 			return false;
 	}
-	public static void mkdir(String dirPath) {
+	
+	public static boolean dirExist(String dirPath) {
 		File dir = new File(dirPath);
-		dir.mkdir();
+		if  (!dir .exists()  && !dir .isDirectory()){       
+		    return false;   
+		} 
+		else{  
+		    return true;
+		}
+	}
+	
+	
+	public static void mkdir(String dirPath) throws UException {
+		if(dirExist(dirPath) == false) {
+			File dir = new File(dirPath);
+			dir.mkdir();
+		}
+		else {
+			throw new UException("dir has already been there!");
+		}
 	}
 }

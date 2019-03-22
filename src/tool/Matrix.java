@@ -41,4 +41,15 @@ public class Matrix implements java.io.Serializable{
 		}
 		return m.toString();
 	}
+	
+	public int getRow() {
+		return row;
+	}
+	public int getCol() {
+		return col;
+	}
+	public int[][] getData() {
+		return data;
+	}
+
 }

@@ -15,9 +15,9 @@ import javax.crypto.SecretKey;
 
 public class DESTest {
 
-	String KeyPath = "DESTest/DESkey.dat";
-	String algorithm="DES";
-	SecretKey DESkey;
+	static final String KeyPath = "DESTest/DESkey.dat";
+	static final String algorithm="DES";
+	static SecretKey DESkey;
 	
 	public static void main(String[] args) {
 		DESTest des = new DESTest();
@@ -44,6 +44,15 @@ public class DESTest {
 		System.out.println("Decrypt Time used: "+(endTime-startTime)+"ms");
 	}
 	
+	public static void run() {
+		long startTime, endTime;
+		startTime =  System.currentTimeMillis();
+	}
+	
+	public static void generateKey() {
+		
+	}
+	
 	public String decrypt(String input){
 		try{
 			String ciphertext = Base64.encode(readInbyte(input));
@@ -60,7 +69,7 @@ public class DESTest {
 			}
 			Cipher cipher = Cipher.getInstance(algorithm);
 			cipher.init(Cipher.DECRYPT_MODE, DESkey);
-			//System.out.println("decrypt string:"+cipertext.toString());
+
 			byte[] output = cipher.doFinal(Base64.decode(ciphertext));
 			return new String(output);
 		}catch (Exception e) {

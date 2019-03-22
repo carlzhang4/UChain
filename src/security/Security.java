@@ -29,7 +29,7 @@ import main.UException;
 import tool.Tool;
 
 public class Security {
-	private static String dirPath = "./nodeInfo/keyFile";
+	private static final String dirPath = "./nodeInfo/keyFile";
 	public static final String SIGN_ALGORITHMS = "SHA1WithRSA";
 
 	public static void test() throws Exception {  //Test API functions
@@ -49,6 +49,7 @@ public class Security {
 
 	public static void generateKey() throws NoSuchAlgorithmException, IOException {
 
+		Tool.mkdir(dirPath);
 		KeyPairGenerator keyPairGen = null;
 		keyPairGen = KeyPairGenerator.getInstance("RSA");
 		// initialize generator,96-1024bits
