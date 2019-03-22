@@ -1,6 +1,6 @@
-package main;
-import security.*;
-public class MainTest {  
+package security;
+
+public class RSATest {  
    
     public static void main(String[] args) throws Exception {  
         String filepath="./nodeInfo/keyFile";  

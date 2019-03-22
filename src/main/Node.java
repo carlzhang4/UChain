@@ -15,6 +15,7 @@ public class Node{
        } 
        catch (Exception e) {
     	 Tool.err(e.getMessage());
+    	 e.printStackTrace();
        }
         
         
