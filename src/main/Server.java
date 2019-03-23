@@ -4,26 +4,30 @@ package main;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import tool.Matrix;
-import tool.Tool;
+import tool.*;
+
  
 public class Server {
 	static ServerSocket server;
 	static Thread_Server thread;
-	
 	public static void main(String[] args) throws IOException {
-		ServerSocket server = new ServerSocket(10000);
-		new Thread_Server(server).start();;
-		while (true) {
-			
-		}
+		start();
 	}
-	public static void run() throws IOException {
-		server = new ServerSocket(10000);
-		thread = new Thread_Server(server);;
+	public static void start() throws IOException {
+		for(int i=Config.PORT_START; i<=Config.PORT_END; i++) {
+			try {
+				server = new ServerSocket(i);
+				Config.PORT = i;
+				Tool.print("Server started at port:"+Config.PORT);
+				break;
+			}
+			catch (Exception e) {
+				Tool.print("port "+i+" has been used!");
+			}
+		}
+		thread = new Thread_Server(server);
 		thread.start();
 		while (true) {
-			
 		}
 	}
 	public static void stop() throws InterruptedException {
@@ -31,6 +35,7 @@ public class Server {
 			thread.interrupt();
 	        thread.join();
 	        thread = null;
+	        server = null;
 		}
 		else {
 			Tool.print("The thread has already been stopped!");
@@ -58,30 +63,29 @@ class Thread_Server extends Thread{
 			
 			new Thread(new Runnable() {
 				public void run() {
-					ObjectInputStream is = null;
-					ObjectOutputStream os = null;
+					ObjectInputStream inputStream = null;
+					ObjectOutputStream outputStream = null;
 					try {
-						is = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-						os = new ObjectOutputStream(socket.getOutputStream());
-	 
-						Object obj = is.readObject();
+						inputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+						outputStream = new ObjectOutputStream(socket.getOutputStream());
+						Object obj = inputStream.readObject();
+						//TO DO
 						Matrix m = (Matrix)obj;
 						Tool.print(m.toString());
 						m.change_value_at(0, 0, 3);
-						os.writeObject(m);
-						os.flush();
+						outputStream.writeObject(m);
+						outputStream.flush();
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
 						try {
-							is.close();
-							os.close();
+							inputStream.close();
+							outputStream.close();
 							socket.close();
 						} 
 						catch(Exception e) {
 							e.printStackTrace();
 						}
-
 					}
 				}
 			}).start();
