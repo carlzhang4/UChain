@@ -3,9 +3,7 @@ package communication;
 import tool.Config.objectType;
 
 public class Matrix implements java.io.Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5164470290457547216L;
 	private static objectType type = objectType.Matrix;
 	private int row;

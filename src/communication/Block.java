@@ -9,5 +9,4 @@ public class Block implements Serializable{
 	public int lastBlockHash;
 	public Vector<Matrix> a = new Vector<>();
 	
-	
 }
