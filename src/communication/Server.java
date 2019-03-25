@@ -1,4 +1,4 @@
-package main;
+package communication;
 
 
 import java.io.*;
@@ -36,9 +36,10 @@ public class Server {
 	        thread.join();
 	        thread = null;
 	        server = null;
+	        Config.PORT = 0;
 		}
 		else {
-			Tool.print("The thread has already been stopped!");
+			Tool.print("The thread has already stopped!");
 		}
 	}
  
@@ -54,41 +55,46 @@ class Thread_Server extends Thread{
 	
 	public void run(){
 		while (true) {
-			
 			try {
 				socket = server.accept();
+				new Thread_Socket(socket).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			new Thread(new Runnable() {
-				public void run() {
-					ObjectInputStream inputStream = null;
-					ObjectOutputStream outputStream = null;
-					try {
-						inputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-						outputStream = new ObjectOutputStream(socket.getOutputStream());
-						Object obj = inputStream.readObject();
-						//TO DO
-						Matrix m = (Matrix)obj;
-						Tool.print(m.toString());
-						m.change_value_at(0, 0, 3);
-						outputStream.writeObject(m);
-						outputStream.flush();
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-							inputStream.close();
-							outputStream.close();
-							socket.close();
-						} 
-						catch(Exception e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}).start();
+		}
+	}
+}
+
+class Thread_Socket extends Thread{
+	Socket socket;
+	ObjectInputStream inputStream = null;
+	Object preObj = null;
+	Object receivedObj = null;
+
+	public Thread_Socket(Socket socket) {
+		this.socket = socket;
+	}
+	
+	public void run() {
+		try {
+			inputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			preObj = inputStream.readObject();
+			receivedObj = inputStream.readObject();
+			new Processor(preObj, receivedObj);
+			Tool.print("Receive done!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				inputStream.close();
+				socket.close();
+				Tool.print("Close Socket!");
+			} 
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

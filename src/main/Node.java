@@ -10,8 +10,9 @@ public class Node{
 	public static void main(String[] args)  { //after node has been started, run main all the time
        try {
     	   NodeInfo.run();
-    	   ProblemPublisher.run();
-    	   //Security.test();
+    	   //ProblemPublisher.run();
+    	   Security.test();
+    	   Tool.print(Security.getPublicKey());
        } 
        catch (Exception e) {
     	 Tool.err(e.getMessage());

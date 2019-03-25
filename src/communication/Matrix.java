@@ -1,7 +1,13 @@
-package tool;
+package communication;
+
+import tool.Config.objectType;
 
 public class Matrix implements java.io.Serializable{
-	private static final long serialVersionUID = 4125096758372084309L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5164470290457547216L;
+	private static objectType type = objectType.Matrix;
 	private int row;
 	private int col;
 	private int[][] data;
@@ -21,6 +27,10 @@ public class Matrix implements java.io.Serializable{
 		}
 		else
 			return false;
+	}
+	
+	public void change_data(int [][]data) {
+		this.data = data;
 	}
 	
 	public void clear() {

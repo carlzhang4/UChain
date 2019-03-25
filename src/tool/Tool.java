@@ -2,8 +2,6 @@ package tool;
 
 import java.io.File;
 
-import main.UException;
-
 public class Tool{
 	public static void print(String content){
 		System.out.println(content);

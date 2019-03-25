@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 
 import tool.*;
 
-import tool.Matrix;
+import communication.*;
 
 public class FileTest {
 	public static void main(String[] args) throws Exception {

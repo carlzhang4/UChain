@@ -7,6 +7,8 @@ public class Config {
 	
 	public enum objectType{
 		Matrix,
-		Block
+		Block,
+		Problem
 	}
+	
 }

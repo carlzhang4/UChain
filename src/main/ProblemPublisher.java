@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
-import tool.Matrix;
+import communication.Matrix;
 import tool.Tool;
 import tool.UException;
 
