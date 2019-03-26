@@ -15,7 +15,6 @@ public class Processor {
 			Tool.print(problem.toString());
 		}
 		else if (preInfo.infoType == Config.objectType.Block) {
-			
 		}
 
 	}

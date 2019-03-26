@@ -12,7 +12,7 @@ public class ProblemSolver {
 		Matrix b = new Matrix(3, 3);
 		int[][] data1 = {{4,2,3},{2,1,4},{5,2,2}};
 		int[][] data2 = {{2,3,4},{5,3,2},{1,2,4}};
-		
+
 		a.change_data(data1);
 		b.change_data(data2);
 		Problem problem = new Problem(a, b);
@@ -20,11 +20,11 @@ public class ProblemSolver {
 		Tool.print(answer);
 		Tool.print(answer.hashCode());
 	}
-	
+
 	public ProblemSolver(Problem problem) {
 		matrixA = problem.matrixA;
 		matrixB = problem.matrixB;
-		
+
 	}
 	public Matrix run() {
 		int col = matrixA.getCol();

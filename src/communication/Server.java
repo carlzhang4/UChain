@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import tool.*;
 
- 
+
 public class Server {
 	static ServerSocket server;
 	static Thread_Server thread;
@@ -42,17 +42,17 @@ public class Server {
 			Tool.print("The thread has already stopped!");
 		}
 	}
- 
+
 }
 class Thread_Server extends Thread{
-	
+
 	ServerSocket server;
 	Socket socket;
-	
+
 	public Thread_Server(ServerSocket server) {
 		this.server = server;
 	}
-	
+
 	public void run(){
 		while (true) {
 			try {
@@ -61,7 +61,7 @@ class Thread_Server extends Thread{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 }
@@ -75,7 +75,7 @@ class Thread_Socket extends Thread{
 	public Thread_Socket(Socket socket) {
 		this.socket = socket;
 	}
-	
+
 	public void run() {
 		try {
 			inputStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -83,7 +83,7 @@ class Thread_Socket extends Thread{
 			receivedObj = inputStream.readObject();
 			new Processor(preObj, receivedObj);
 			Tool.print("Receive done!");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -91,7 +91,7 @@ class Thread_Socket extends Thread{
 				inputStream.close();
 				socket.close();
 				Tool.print("Close Socket!");
-			} 
+			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}

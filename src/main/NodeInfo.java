@@ -13,12 +13,15 @@ import security.*;
 public class NodeInfo {
 	private final static String dirPath = "./nodeInfo";
 	private static ArrayList<String> checkList = new ArrayList<String>()
-		{{
+		{
+		private static final long serialVersionUID = 1L;
+
+		{
 			add("/node");
 			add("/keyFile/publicKey.keystore");
 			add("/keyFile/privateKey.keystore");
-		}}; 
-	
+		}};
+
 	public static void run() throws Exception {
 		if(infoExists()) {
 			Tool.print("Info load success!");
@@ -26,28 +29,28 @@ public class NodeInfo {
 		else {
 			buildInfo();
 		}
-		
+
 	}
-	
+
 	private static void buildInfo() throws IOException, NoSuchAlgorithmException, UException{
 			if(!Tool.fileExist(dirPath)) {
 				Tool.mkdir(dirPath);
 				Tool.print("Dir create success!");
 			}
-			
+
 			for (int i = 0; i < checkList.size(); i++){
-				
+
 				if(!Tool.fileExist(dirPath+checkList.get(i))) {
 					Tool.print("lack of "+dirPath+checkList.get(i));
-					
+
 					switch (checkList.get(i)) {
 						case "/node":{
 							FileWriter nodeFW = new FileWriter(dirPath + "/node");
-				    		BufferedWriter nodeBW = new BufferedWriter(nodeFW); 
+				    		BufferedWriter nodeBW = new BufferedWriter(nodeFW);
 				    		nodeBW.write("123");
-				    		nodeBW.flush();  
-				    		nodeBW.close();  
-				            nodeFW.close(); 
+				    		nodeBW.flush();
+				    		nodeBW.close();
+				            nodeFW.close();
 				            Tool.print("File node create success!");
 							break;
 						}
@@ -59,9 +62,9 @@ public class NodeInfo {
 					}
 				}
 			}
-    		
+
     }
-	
+
 	private static boolean infoExists() {
 		for (int i = 0; i < checkList.size(); i++){
 			if(!Tool.fileExist(dirPath+checkList.get(i))) {

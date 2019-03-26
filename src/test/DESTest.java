@@ -20,7 +20,7 @@ public class DESTest {
 	static final String KeyPath = "DESTest/DESkey.dat";
 	static final String algorithm="DES";
 	static SecretKey DESkey;
-	
+
 	public static void main(String[] args) {
 		DESTest des = new DESTest();
 		long startTime, endTime;
@@ -30,35 +30,31 @@ public class DESTest {
 		//des.encrypt("DESTest/plain.txt");
 		endTime =  System.currentTimeMillis();
 		System.out.println("Encrypt Time used: "+(endTime-startTime)+"ms");
-		
+
 		try{
 			FileOutputStream out = new FileOutputStream(new File("DESTest/cipher.txt"));
 			out.write(Base64.decode(encrypt_out));
 			out.close();
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 		startTime =  System.currentTimeMillis();
 		des.decrypt("DESTest/cipher.txt");
 		endTime =  System.currentTimeMillis();
 		System.out.println("Decrypt Time used: "+(endTime-startTime)+"ms");
 	}
-	
-	public static void run() {
-		long startTime, endTime;
-		startTime =  System.currentTimeMillis();
-	}
-	
+
+
+
 	public static void generateKey() {
-		
+
 	}
-	
+
 	public String decrypt(String input){
 		try{
 			String ciphertext = Base64.encode(readInbyte(input));
-			
+
 			//use the ciper text in a byte type from the father function
 			if(!(new File(KeyPath)).exists()){
 				System.out.println("can not find the DES key!");
@@ -75,15 +71,14 @@ public class DESTest {
 			byte[] output = cipher.doFinal(Base64.decode(ciphertext));
 			return new String(output);
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
-	
-	
+
+
+
+
 	public String encrypt(String input)
 	{
 		try{
@@ -94,13 +89,13 @@ public class DESTest {
 				content.append(s);
 			}
 			in_clear.close();
-			
+
 			String cleartext=content.toString();
 			if(!(new File(KeyPath)).exists()){
 				System.out.println("creating DES key");
 				KeyGenerator keygen=KeyGenerator.getInstance(algorithm);
 				DESkey = keygen.generateKey();
-				
+
 				ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(KeyPath));
 				outputStream.writeObject(DESkey);
 				outputStream.close();
@@ -116,12 +111,11 @@ public class DESTest {
 			byte[] output = c1.doFinal(cleartext.getBytes());
 			return Base64.encode(output);
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public byte[] readInbyte(String inputname)
 	{
 		try{
@@ -129,23 +123,23 @@ public class DESTest {
 			FileInputStream in = new FileInputStream(file);
 			long filesize = file.length();
 			byte[] readin = new byte[(int)filesize];
-			
+
 			int offset=0;
 			int numRead=0;
-			
+
 			while(offset<readin.length&&(numRead = in.read(readin, offset, readin.length-offset))>=0){
 				offset+=numRead;
 			}
 			if(offset!=readin.length){
+				in.close();
 				throw new IOException("can not read completely of file :"+file.getName());
 			}
 			in.close();
 			return readin;
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 }

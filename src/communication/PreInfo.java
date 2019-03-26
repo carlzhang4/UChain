@@ -4,7 +4,7 @@ import tool.Config;
 
 public class PreInfo implements java.io.Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2839769766911909191L;
 	private int port;
@@ -15,7 +15,7 @@ public class PreInfo implements java.io.Serializable{
 		this.publicKey = publicKey;
 		this.infoType = infoType;
 	}
-	
+
 	public String toString() {
 		StringBuilder m = new StringBuilder();
 		m.append("PublicKey:"+publicKey+"\n");
