@@ -35,6 +35,9 @@ public class Tool{
 		timeInMillis = calendar.getTimeInMillis();
 		return timeInMillis;
 	}
+	public static String gerCUrrentPath(){
+		return System.getProperty("user.dir");
+	}
 
 	public static boolean fileExist(String filePath) {
 		File file = new File(filePath);

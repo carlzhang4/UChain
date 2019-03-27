@@ -6,15 +6,15 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import tool.Config;
 import tool.Tool;
- 
+
 public class Sender {
-	
+
 	public static void broadcast() {
 		Matrix matrix = new Matrix(4, 4);
 		new Thread_Sender((Object)matrix,Config.objectType.Matrix).start();;
 	}
-	
-	
+
+
 	public static void main(String[] args) throws Exception {
 		broadcast();
 	}
@@ -23,7 +23,7 @@ public class Sender {
 class Thread_Sender extends Thread{
 	Object obj;
 	Config.objectType dataType;
-	
+
 	public Thread_Sender(Object obj,Config.objectType dataType) {
 		this.dataType = dataType;
 		this.obj = obj;
@@ -61,7 +61,7 @@ class Thread_Sender extends Thread{
 					try {
 						outputStream.close();
 						socket.close();
-					} 
+					}
 					catch(Exception ex) {
 						ex.printStackTrace();
 					}

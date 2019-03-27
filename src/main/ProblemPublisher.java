@@ -13,7 +13,7 @@ import tool.UException;
 
 
 public class ProblemPublisher{
-	
+
 	private final static String filePathA = "./nodeInfo/problem/matrix_a";
 	private final static String filePathB = "./nodeInfo/problem/matrix_b";
 	public static void run() throws UException, IOException, ClassNotFoundException {
@@ -21,12 +21,12 @@ public class ProblemPublisher{
 			throw new UException("No matrix file!");
 		}
 		else {
-			
+
 			FileInputStream fis = new FileInputStream(filePathA);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			Matrix ma= (Matrix) ois.readObject();
 			Tool.print(ma.toString());
-			
+
 			fis = new FileInputStream(filePathB);
 			ois = new ObjectInputStream(fis);
 
@@ -34,12 +34,12 @@ public class ProblemPublisher{
 			Tool.print(mb.toString());
 			ois.close();
 
-			
+
 
 
 		}
 	}
-	
+
 
 
 
