@@ -6,9 +6,8 @@ public class Config {
 	public static int PORT = 0;
 
 	public enum objectType{
-		Matrix,
-		Block,
-		Problem
+		BLOCK,
+		ATOMINFO
 	}
 
 }

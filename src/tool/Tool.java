@@ -1,42 +1,70 @@
 package tool;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Tool{
+import communication.Matrix;
+
+public class Tool {
 	static Calendar calendar = Calendar.getInstance();
 	static Date time;
 	static long timeInMillis;
-	public static void print(String content){
+
+	public static void print(String content) {
 		System.out.println(content);
 	}
-	public static void print(int content){
+
+	public static void print(int content) {
 		System.out.println(content);
 	}
-	public static void print(double content){
+
+	public static void print(double content) {
 		System.out.println(content);
 	}
-	public static void print(float content){
+
+	public static void print(float content) {
 		System.out.println(content);
 	}
-	public static void print(Boolean content){
+
+	public static void print(Boolean content) {
 		System.out.println(content);
 	}
+
 	public static void err(String err_info) {
 		System.err.println(err_info);
 	}
 
-	public static String getTime(){
+	public static String getTime() {
 		time = calendar.getTime();
 		return time.toString();
 	}
-	public static long getTimeInMillis(){
+
+	public static long getTimeInMillis() {
 		timeInMillis = calendar.getTimeInMillis();
 		return timeInMillis;
 	}
-	public static String gerCUrrentPath(){
+
+	public static String gerCurrentPath() {
 		return System.getProperty("user.dir");
+	}
+
+	public static Matrix getMatrixFromPath(String path) {
+
+
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Matrix m = (Matrix)ois.readObject();
+			ois.close();
+			return m;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static boolean fileExist(String filePath) {

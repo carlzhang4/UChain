@@ -1,6 +1,7 @@
 package communication;
 
 import tool.Config;
+import tool.Config.objectType;
 
 public class PreInfo implements java.io.Serializable{
 	/**
@@ -10,7 +11,7 @@ public class PreInfo implements java.io.Serializable{
 	private int port;
 	private String publicKey;
 	public Config.objectType infoType;
-	public PreInfo(int port, String publicKey, Config.objectType infoType) {
+	public PreInfo(int port, String publicKey, objectType infoType) {
 		this.port = port;
 		this.publicKey = publicKey;
 		this.infoType = infoType;
