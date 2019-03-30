@@ -1,11 +1,11 @@
-package communication;
+package blockchain;
 
 import java.io.Serializable;
 
 import security.Security;
 import tool.Tool;
 
-class AtomInfo implements Serializable {
+public class AtomInfo implements Serializable {
     private static final long serialVersionUID = 8721091622416538273L;
     public String srcAddress;
     public String destAddress;
@@ -25,7 +25,7 @@ class AtomInfo implements Serializable {
         AtomInfo a = new AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 10, Security.getPrivateKey());
         Tool.print(a.toString());
         Tool.print(a.verify_sign());
-        AtomInfo b = new  AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 13, Security.getPrivateKey(), 2, 4, serialVersionUID);
+        AtomInfo b = new  AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 13, Security.getPrivateKey(), 2, 4, 0);
         Tool.print(b.toString());
         Tool.print(b.verify_sign());
     }
@@ -39,6 +39,7 @@ class AtomInfo implements Serializable {
         timeInmillis = Tool.getTimeInMillis();
         sign(privateKey);
     }
+
 
     //CheatInfo
     public AtomInfo(String srcAddress, String destAddress, double amount, String privateKey, int col, int row, long cheatBlockID ) throws Exception {

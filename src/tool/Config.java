@@ -7,7 +7,8 @@ public class Config {
 
 	public enum objectType{
 		BLOCK,
-		ATOMINFO
+		ATOMINFO,
+		CHAIN
 	}
 
 }

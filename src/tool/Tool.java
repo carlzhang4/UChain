@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 
 import communication.Matrix;
 
@@ -13,6 +14,11 @@ public class Tool {
 	static Calendar calendar = Calendar.getInstance();
 	static Date time;
 	static long timeInMillis;
+	static Vector<String> dirs = new Vector<String>();
+
+	public static void main(String[] args) throws UException {
+		initDir();
+	}
 
 	public static void print(String content) {
 		System.out.println(content);
@@ -95,5 +101,18 @@ public class Tool {
 		else {
 			throw new UException("dir has already been there!");
 		}
+	}
+	public static void initDir() throws UException {
+		dirs.add("./nodeInfo");
+		dirs.add("./nodeInfo/chainFile");
+		dirs.add("./nodeInfo/keyFile");
+		dirs.add("./nodeInfo/problem");
+		for(int i=0;i<dirs.size();i++){
+			if(!dirExist(dirs.get(i))){
+				mkdir(dirs.get(i));
+				print("Build dir:"+dirs.get(i));
+			}
+		}
+
 	}
 }

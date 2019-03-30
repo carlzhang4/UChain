@@ -1,4 +1,4 @@
-package communication;
+package blockchain;
 
 import java.io.Serializable;
 import java.util.Vector;
