@@ -24,10 +24,10 @@ public class AtomInfo implements Serializable {
     public static void main(String[] args) throws Exception {
         AtomInfo a = new AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 10, Security.getPrivateKey());
         Tool.print(a.toString());
-        Tool.print(a.verify_sign());
+        Tool.print(a.valid());
         AtomInfo b = new  AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 13, Security.getPrivateKey(), 2, 4, 0);
         Tool.print(b.toString());
-        Tool.print(b.verify_sign());
+        Tool.print(b.valid());
     }
 
     public AtomInfo(String srcAddress, String destAddress, double amount, String privateKey)throws Exception {//transaction
@@ -57,7 +57,7 @@ public class AtomInfo implements Serializable {
 
     public String toString() {
         StringBuilder m = new StringBuilder();
-        m.append("[AtomInfo:\n");
+        m.append("\n[AtomInfo:\n");
         m.append("TYPE:" + type + "\n");
         m.append("Time:" + time + timeInmillis + "\n");
         m.append("SRC:" + srcAddress + "\n");
@@ -76,7 +76,7 @@ public class AtomInfo implements Serializable {
         signedText = Security.sign(this.toString(), privateKey);
     }
 
-    public Boolean verify_sign()throws Exception {
+    public Boolean valid()throws Exception {
         return Security.verify_sign(this.toString(), signedText, srcAddress);
     }
 

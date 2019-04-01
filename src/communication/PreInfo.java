@@ -20,7 +20,7 @@ public class PreInfo implements java.io.Serializable{
 	public String toString() {
 		StringBuilder m = new StringBuilder();
 		m.append("PublicKey:"+publicKey+"\n");
-		m.append("CurrentPort:"+port+"\n");
+		m.append("SrcPort:"+port+"\n");
 		m.append("InfoType:"+infoType+"\n");
 		return m.toString();
 	}

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.Vector;
 
 import communication.Matrix;
@@ -106,7 +107,9 @@ public class Tool {
 		dirs.add("./nodeInfo");
 		dirs.add("./nodeInfo/chainFile");
 		dirs.add("./nodeInfo/keyFile");
-		dirs.add("./nodeInfo/problem");
+		dirs.add("./nodeInfo/task");
+		dirs.add("./nodeInfo/myProblem");
+		dirs.add("./nodeInfo/answer");
 		for(int i=0;i<dirs.size();i++){
 			if(!dirExist(dirs.get(i))){
 				mkdir(dirs.get(i));
@@ -115,4 +118,21 @@ public class Tool {
 		}
 
 	}
+	public static Matrix inputAMatrix(){
+		print("please enter the row and col of the matrix(and the third number to imply whether input the specific value):");
+		Scanner sc = new Scanner(System.in);
+		int row = sc.nextInt();
+		int col = sc.nextInt();
+		int in = sc.nextInt();
+		Matrix returnMaxtrix = new Matrix(row,col);
+		if(in == 1){
+			for(int i=0;i<row;i++)
+				for(int j=0;j<col;j++){
+					returnMaxtrix.change_value_at(i, j, sc.nextInt());
+				}
+		}
+		sc.close();
+		return returnMaxtrix;
+	}
+
 }

@@ -6,12 +6,21 @@ import java.net.Socket;
 import java.util.Vector;
 
 import blockchain.*;
+import security.Security;
 import tool.*;
 
 
 public class Sender {
 	public static void main(String[] args) throws Exception {
-		broadcast(new Block(123, 2,32, new Vector<AtomInfo>(), "addr"));
+		Vector<AtomInfo> infos = new Vector<AtomInfo>();
+		infos.add(new AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 10, Security.getPrivateKey()));
+		infos.add(new  AtomInfo(Security.getPublicKey(), Security.getPublicKey(), 13, Security.getPrivateKey(), 2, 4, 123));
+		Block a = new Block(0,"23",3,infos,Tool.gerCurrentPath());
+        Block b = new Block(a.blockID, "23", 3, infos, Tool.gerCurrentPath());
+        Chain chain = new Chain();
+        chain.addBlock(a);
+		chain.addBlock(b);
+		broadcast(chain);
 	}
 	public static void broadcast(Block block) {
 		new Thread_Sender(block).start();
@@ -39,7 +48,7 @@ class Thread_Sender extends Thread{
 		this.info = info;
 	}
 	public Thread_Sender(Chain chain){
-		this.dataType = Config.objectType.ATOMINFO;
+		this.dataType = Config.objectType.CHAIN;
 		this.chain = chain;
 	}
 
